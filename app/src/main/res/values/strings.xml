@@ -1,0 +1,896 @@
+<resources>
+    <string name="app_name">Sanitization CheckList</string>
+
+    <!--    Areas-->
+    <string name="a1">Check In Hall</string>
+    <string name="a2">F Level Domestic and International </string>
+    <string name="a3">E and D Level Domestic</string>
+    <string name="a4">E and D Level International and IIDT</string>
+    <string name="a5">Carpark and Forecourt</string>
+    <string name="a6">IDAT BMA and Boarding gates</string>
+    <string name="a7">Trolley and Queue Manager</string>
+
+
+    <string name="contact_area">Contact Areas</string>
+    <string name="submit">SUBMIT</string>
+    <string name="area">Area</string>
+    <string name="touch_points">Touch Points</string>
+    <string name="monitor">Monitor</string>
+    <string name="checklist">Checklist</string>
+    <!--    Touch points-->
+    <string-array name="fldi">
+
+        <item>ATRS LANES 1-8</item>
+        <item>DOMESTIC BOARDING GATES</item>
+        <item>INTERNATIONAL BOARDING GATES</item>
+    </string-array>
+    <string-array name="edd">
+        <item>Domestic Arrivals level D</item>
+        <item>Domestic Arrivals level E</item>
+    </string-array>
+    <string-array name="edi">
+        <item>International Arrivals level D</item>
+        <item>International Arrivals level E</item>
+        <item>IIDT Forecourt</item>
+        <item>IIDT Check-in hall</item>
+        <item>IIDT BMA</item>
+    </string-array>
+    <string-array name="cfc">
+        <item>Carpark and Forecourt</item>
+        <item>Garbage room</item>
+    </string-array>
+    <string-array name="ibb">
+        <item>Boarding Gates Domestic</item>
+        <item>IDAT</item>
+        <item>BMA</item>
+        <item>AOCC</item>
+    </string-array>
+    <string-array name="trq">
+        <item>Fore Court</item>
+        <item>Check In Hall</item>
+        <item>Domestic boarding gate</item>
+        <item>International Boarding Gate</item>
+        <item>Arrivals Forecourt</item>
+        <item>Domestic Arrivals</item>
+        <item>IIDT</item>
+    </string-array>
+    <!--    Contact areas-->
+    <string-array name="tp1">
+        <item>Soil barrier mats at entry 1, 2 and 3</item>
+        <item>CISF Counters Gate 1,2 and 3</item>
+        <item>Information Desk </item>
+        <item>Ticketing counters glass</item>
+        <item>Cuss machine </item>
+        <item>Passenger seating</item>
+        <item>Wash room </item>
+        <item>SBD</item>
+        <item>Counters cleaning, including the chairs</item>
+        <item>FIDS and Pillar</item>
+        <item>Acrylic glass shields</item>
+        <item>Printers</item>
+        <item>Monitors</item>
+        <item>OOG Elevators</item>
+        <item>Bio medical waste </item>
+        <item>Normal waste</item>
+    </string-array>
+    <string-array name="tp2">
+        <item>ATRS machine 1</item>
+        <item>ATRS machine 2</item>
+        <item>ATRS machine 3</item>
+        <item>ATRS machine 4</item>
+        <item>ATRS machine 5</item>
+        <item>ATRS machine 6</item>
+        <item>ATRS machine 7</item>
+        <item>ATRS machine 8</item>
+        <item>Divest  stations </item>
+        <item>Out feed tray points </item>
+        <item>Unpacking and Repacking tables</item>
+        <item>Frisking ledges</item>
+        <item>Female frisking booth</item>
+    </string-array>
+    <string-array name="tp3">
+        <item>22 Boarding gate counter and seating area</item>
+        <item>24 Boarding gate counter and seating area</item>
+        <item>26 Boarding gate counter and seating area</item>
+        <item>28  Boarding gate counter and seating area</item>
+        <item>30A Boarding gate counter and seating area</item>
+        <item>30B Boarding gate counter and seating area</item>
+        <item>FIDS and Pillar</item>
+        <item>Boarding gate Escalators and Elevators </item>
+        <item>Acrylic glass shields</item>
+        <item>S10 service corridor</item>
+        <item>Elevator used for accessing Level 4 Screening </item>
+        <item>Remote Bus Gates connecting Elevator and Escalators (F to E)</item>
+        <item>wash room </item>
+        <item>Staff washroom</item>
+        <item>Triage room</item>
+        <item>Bio medical waste</item>
+        <item>Normal waste</item>
+
+    </string-array>
+    <string-array name="tp4">
+        <item>32A Boarding gate counter and seating area</item>
+        <item>32B Boarding gate counter and seating area</item>
+        <item>34A Boarding gate counter and seating area</item>
+        <item>34B Boarding gate counter and seating area</item>
+        <item>FIDS and Pillar</item>
+        <item>Boarding gate Escalators and Elevators </item>
+        <item>Acrylic glass shields</item>
+        <item>S9 service corridor</item>
+        <item>wash room </item>
+        <item>Prayer room</item>
+        <item>Bio medical waste </item>
+        <item>Normal waste</item>
+    </string-array>
+    <string-array name="tp5">
+        <item>Belt  2A, 2 and 3</item>
+        <item>FIDS and Pillar</item>
+        <item>Reserved  Lounge </item>
+        <item>P-20  elevator from Level D -E</item>
+        <item>Transfer Desk counters </item>
+        <item>Wash room </item>
+        <item>Bio medical waste </item>
+        <item>Normal waste</item>
+    </string-array>
+    <string-array name="tp6">
+        <item>Escalator</item>
+        <item>Transfer  area including XBIS machines</item>
+        <item>22 Boarding bridge</item>
+        <item>24 Boarding bridge</item>
+        <item>26 Boarding bridge</item>
+        <item>30A Boarding bridge</item>
+        <item>30B Boarding bridge</item>
+        <item>FIDS and Pillar</item>
+        <item>Passenger  seating</item>
+        <item>Art  gallery</item>
+        <item>Prayer room</item>
+        <item>wash room</item>
+        <item>PESC staff</item>
+        <item>Bio medical waste</item>
+        <item>Normal waste</item>
+
+    </string-array>
+    <string-array name="tp7">
+        <item>Belts 4 and 5</item>
+        <item>FIDS and Pillar</item>
+        <item>Passenger seating</item>
+        <item>Escalator</item>
+        <item>MHB Counter</item>
+        <item>Customs Offices</item>
+        <item>wash room</item>
+        <item>Bio medical waste</item>
+        <item>Normal wsate</item>
+
+    </string-array>
+    <string-array name="tp8">
+        <item>32 A Boarding Bridge</item>
+        <item>32 B Boarding Bridge</item>
+        <item>34 A Boarding Bridge</item>
+        <item>34 B Boarding Bridge</item>
+        <item>33 remote arrival</item>
+        <item>Passenger seating</item>
+        <item>Reserved lounge</item>
+        <item>FIDS  and Pillar</item>
+        <item>Customs HBS</item>
+        <item>Immigration Counters</item>
+        <item>Transfer area including XBIS</item>
+        <item>Isolation room</item>
+        <item>State police counter</item>
+        <item>APHO</item>
+        <item>Immigration Offices</item>
+        <item>Customs Offices</item>
+        <item>wash room</item>
+        <item>Bio medical waste</item>
+        <item>Normal wsate</item>
+
+    </string-array>
+    <string-array name="tp9">
+        <item>Canopy Pathway</item>
+        <item>Entry Gates</item>
+        <item>Hand Rails</item>
+        <item>wash room</item>
+        <item>Bio medical waste</item>
+        <item>Normal wsate</item>
+
+    </string-array>
+    <string-array name="tp10">
+        <item>Check-in Counters</item>
+        <item>Visitors Gallery</item>
+        <item>FIDS and Pillar</item>
+        <item>Immigration Counters</item>
+        <item>Customs Counter</item>
+        <item>Immigration Offices</item>
+        <item>Customs Office</item>
+        <item>CISF Office</item>
+        <item>ATRS and Standalone XBIS</item>
+        <item>Connecting Corridor</item>
+        <item>Passenger Seating</item>
+        <item>Wash room</item>
+        <item>Reserved lounge</item>
+        <item>Bio medical waste</item>
+        <item>Normal wsate</item>
+
+    </string-array>
+    <string-array name="tp11">
+        <item>Level 4 Office</item>
+        <item>wash room</item>
+
+    </string-array>
+    <string-array name="tp12">
+        <item>Entry 1 Connecting Bridge</item>
+        <item>Entry 3 Connecting bridge</item>
+        <item>Corridor between Entry 1,2 and 3</item>
+        <item>Escalators entry gate 1  and 3</item>
+        <item>Elevators P1-P4 at gate 1and 3</item>
+        <item>Hand Rails</item>
+        <item>Cuss machine</item>
+        <item>Triage room</item>
+        <item>PRM Lounge</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+        <item>East and West extended plates</item>
+        <item>Information  Desk</item>
+        <item>Airport village</item>
+        <item>Hand Rails</item>
+        <item>Arrival ramp</item>
+        <item>Escalators</item>
+        <item>Triage room</item>
+        <item>PRM Lounge</item>
+        <item>wash room</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+        <item>Food street pathway and Staircase</item>
+        <item>wash room</item>
+        <item>Staircase 3-4</item>
+        <item>Elevator  S 1 and S4</item>
+        <item>S1 and S4 corridor</item>
+        <item>Logistics, Level B drive way</item>
+        <item>Staff Lockers</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+        <item>B level Drains</item>
+        <item>Staff Washroom</item>
+
+    </string-array>
+    <string-array name="tp13">
+        <item>B level garbage room</item>
+    </string-array>
+    <string-array name="tp14">
+        <item>Passenger seating</item>
+        <item>Boarding gate counters</item>
+        <item>Boarding gate Escalators and Elevators</item>
+        <item>Acrylic glass shields</item>
+        <item>Bus gate payement area</item>
+        <item>wash room</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+
+    </string-array>
+    <string-array name="tp15">
+        <item>Belt 6 , 7 , 8 and 9</item>
+        <item>Baggage  enquiry / Information desks</item>
+        <item>Passenger seating</item>
+        <item>Inclinators</item>
+        <item>Railing</item>
+        <item>Remote arrival washroom</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+        <item>wash room</item>
+
+    </string-array>
+    <string-array name="tp16">
+        <item>Public area</item>
+        <item>Wash room</item>
+        <item>Ramp wash room</item>
+        <item>Apollo wash  room</item>
+        <item>Staircase 1-2</item>
+        <item>Elevator S9 and S10</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+
+    </string-array>
+    <string-array name="tp17">
+        <item>AOCC- PA</item>
+        <item>AOCC wash room</item>
+        <item>Bio medical waste</item>
+        <item>Normal Waste</item>
+
+    </string-array>
+
+    <string-array name="tp18">
+        <item>Baggage Trolleys
+</item>
+    </string-array>
+    <string-array name="tp19">
+        <item>Baggage Trolleys</item>
+        <item>Trays cleaning</item>
+        <item>Q-Managers</item>
+
+    </string-array>
+    <string-array name="tp20">
+        <item>Q Top Signage  boards</item>
+        <item>Shopping Trolleys</item>
+        <item>Q-Managers</item>
+
+    </string-array>
+    <string-array name="tp21">
+        <item>Q Top Signage  boards</item>
+        <item>Shopping Trolleys</item>
+        <item>Q-Managers</item>
+
+    </string-array>
+    <string-array name="tp22">
+        <item>Shopping Trolleys</item>
+        <item>Baggage Trolleys</item>
+
+    </string-array>
+    <string-array name="tp23">
+        <item>Baggage Trolleys</item>
+        <item>Q-Managers</item>
+        <item>Q Top Signage boards</item>
+
+    </string-array>
+    <string-array name="tp24">
+
+        <item>Q Top Signage boards</item>
+        <item>Q-Managers</item>
+        <item>Baggage Trolleys</item>
+        <item>Trays cleaning</item>
+
+    </string-array>
+    <string-array name="TouchPoint">
+        <item>ATRS LANES 1-8</item>
+        <item>DOMESTIC BOARDING GATES</item>
+        <item>INTERNATIONAL BOARDING GATES</item>
+        <item>Domestic Arrivals level D</item>
+        <item>Domestic Arrivals level E</item>
+        <item>International Arrivals level D</item>
+        <item>International Arrivals level E</item>
+        <item>IIDT Forecourt</item>
+        <item>IIDT Check-in hall</item>
+        <item>IIDT BMA</item>
+        <item>Carpark and Forecourt</item>
+        <item>Garbage room</item>
+        <item>Boarding Gates Domestic</item>
+        <item>IDAT</item>
+        <item>BMA</item>
+        <item>AOCC</item>
+        <item>Fore Court</item>
+        <item>Check In Hall</item>
+        <item>Domestic boarding Gate</item>
+        <item>International Boarding Gate</item>
+        <item>Arrivals Forecourt</item>
+        <item>Domestic Arrivals</item>
+        <item>IIDT</item>
+    </string-array>
+
+    <string-array name="tpcp1">
+        <item>M,F</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp2">
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,M</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp3">
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W</item>
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp4">
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W</item>
+        <item>W,F</item>
+        <item>W</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp5">
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp6">
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp7">
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,F</item>
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp8">
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,M,F</item>
+        <item>W</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,M,F</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp9">
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp10">
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+    </string-array>
+    <string-array name="tpcp11">
+        <item>W,F,M</item>
+        <item>W,F,M</item>>
+    </string-array>
+
+
+    <string-array name="tpcp12">
+        <item>W,M</item>
+        <item>W,M</item>
+        <item>W,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+
+
+    </string-array>
+    <string-array name="tpcp13">
+        <item>W,F,M</item>
+    </string-array>
+    <string-array name="tpcp14">
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp15">
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+        <item>W,F,M</item>
+
+    </string-array>
+    <string-array name="tpcp16">
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+
+    <string-array name="tpcp17">
+        <item>W,F,M</item>
+        <item>W,F,M</item>
+        <item>W,F</item>
+        <item>W,F</item>
+
+    </string-array>
+    <string-array name="tpcp18">
+        <item>Baggage Trolleys</item>
+
+    </string-array>
+    <string-array name="tpcp19">
+        <item>Baggage Trolleys</item>
+        <item>Trays cleaning</item>
+        <item>Q-Managers</item>
+
+    </string-array>
+    <string-array name="tpcp20">
+        <item>Q Top Signage  boards</item>
+        <item>Shopping Trolleys</item>
+        <item>Q-Managers</item>
+
+    </string-array>
+    <string-array name="tpcp21">
+        <item>Q Top Signage  boards</item>
+        <item>Shopping Trolleys</item>
+        <item>Q-Managers</item>
+
+    </string-array>
+    <string-array name="tpcp22">
+        <item>Shopping Trolleys</item>
+        <item>Baggage Trolleys</item>
+
+    </string-array>
+    <string-array name="tpcp23">
+        <item>Baggage Trolleys</item>
+        <item>Q-Managers</item>
+        <item>Q Top Signage boards</item>
+
+    </string-array>
+    <string-array name="tpcp24">
+        <item>Q Top Signage boards</item>
+        <item>Q-Managers</item>
+        <item>Baggage Trolleys</item>
+        <item>Trays cleaning</item>
+
+    </string-array>
+
+    <string-array name="tpt1">
+        <item>08:00–11:00 am</item>
+        <item>12:00-15:00 pm</item>
+    </string-array>
+    <string-array name="tpt2">
+        <item>08:00 - 9:00 am</item>
+        <item>12:00 - 13:00 pm</item>
+    </string-array>
+    <string-array name="tpt3">
+        <item>09:00 - 11:00 am</item>
+        <item>12:00 - 13:00 pm</item>
+    </string-array>
+    <string-array name="tpt4">
+        <item>08:00 - 11:00 am</item>
+        <item>13:00 - 15:00 am</item>
+    </string-array>
+    <string-array name="tpt5">
+        <item>8:00 - 09:00 am</item>
+        <item>12:00 - 13:00 pm</item>
+    </string-array>
+    <string-array name="tpt6">
+        <item>09:00 - 11:00 am</item>
+        <item>13:00 - 15:00 pm</item>
+    </string-array>
+    <string-array name="tpt7">
+        <item>08:00 - 10:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt8">
+        <item>8:00 - 11:00 am</item>
+        <item>12:00 - 15:00 pm</item>
+    </string-array>
+    <string-array name="tpt9">
+        <item> 08:00 - 9:00 am</item>
+        <item>12:00 - 13:00 pm</item>
+    </string-array>
+
+    <string-array name="tpt10">
+        <item>08:00 - 11:00</item>
+        <item>12:00 - 15:00 pm</item>
+    </string-array>
+    <string-array name="tpt11">
+        <item>08:00 - 11:00</item>
+        <item>12:00 - 15:00 pm</item>
+    </string-array>
+    <string-array name="tpt12">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt13">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt14">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt15">
+        <item>08:00 - 11:00  am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt16">
+        <item> 08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt17">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt18">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt19">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt20">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt21">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt22">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt23">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+    <string-array name="tpt24">
+        <item>08:00 - 11:00 am</item>
+        <item>12:00 - 14:00 pm</item>
+    </string-array>
+
+    <string-array name="inspectedBy">
+        <item>SELECT</item>
+        <item>Supervisor</item>
+        <item>floor Executive</item>
+        <item>Shift Lead</item>
+
+    </string-array>
+
+    <string-array name="UNIQUECONTACTAREAS">
+        <item>Escalator</item>
+        <item>22 Boarding bridge</item>
+        <item>22 Boarding gate counter and seating area</item>
+        <item>24 Boarding bridge</item>
+        <item>24 Boarding gate counter and seating area</item>
+        <item>26 Boarding bridge</item>
+        <item>26 Boarding gate counter and seating area</item>
+        <item>28  Boarding gate counter and seating area</item>
+        <item>30A Boarding bridge</item>
+        <item>30A Boarding gate counter and seating area</item>
+        <item>30B Boarding bridge</item>
+        <item>30B Boarding gate counter and seating area</item>
+        <item>32 A Boarding Bridge</item>
+        <item>32 B Boarding Bridge</item>
+        <item>32A Boarding gate counter and seating area</item>
+        <item>32B Boarding gate counter and seating area</item>
+        <item>33 remote arrival</item>
+        <item>34 A Boarding Bridge</item>
+        <item>34 B Boarding Bridge</item>
+        <item>34A Boarding gate counter and seating area</item>
+        <item>34B Boarding gate counter and seating area</item>
+        <item>Acrylic glass shields</item>
+        <item>Airport village</item>
+        <item>AOCC- PA</item>
+        <item>AOCC wash room</item>
+        <item>APHO</item>
+        <item>Apollo wash  room</item>
+        <item>Arrival ramp</item>
+        <item>Art  gallery</item>
+        <item>ATRS and Standalone XBIS</item>
+        <item>ATRS machine 1</item>
+        <item>ATRS machine 2</item>
+        <item>ATRS machine 3</item>
+        <item>ATRS machine 4</item>
+        <item>ATRS machine 5</item>
+        <item>ATRS machine 6</item>
+        <item>ATRS machine 7</item>
+        <item>ATRS machine 8</item>
+        <item>B level Drains</item>
+        <item>B level garbage room</item>
+        <item>Baggage  enquiry / Information desks</item>
+        <item>Baggage Trolleys</item>
+        <item>Belt  2A, 2 and 3</item>
+        <item>Belt 6 , 7 , 8 and 9</item>
+        <item>Belts 4 and 5</item>
+        <item>Bio medical waste</item>
+        <item>Boarding gate counters</item>
+        <item>Boarding gate Escalators and Elevators</item>
+        <item>Bus gate payement area</item>
+        <item>Canopy Pathway</item>
+        <item>Check-in Counters</item>
+        <item>CISF Counters Gate 1,2 and 3</item>
+        <item>CISF Office</item>
+        <item>Connecting Corridor</item>
+        <item>Corridor between Entry 1,2 and 3</item>
+        <item>Counters cleaning, including the chairs</item>
+        <item>Cuss machine</item>
+        <item>Customs Counter</item>
+        <item>Customs HBS</item>
+        <item>Customs Office</item>
+        <item>Customs Offices</item>
+        <item>Divest  stations</item>
+        <item>East and West extended plates</item>
+        <item>Elevator  S 1 and S4</item>
+        <item>Elevator S9 and S10</item>
+        <item>Elevator used for accessing Level 4 Screening</item>
+        <item>Elevators P1-P4 at gate 1and 3</item>
+        <item>Entry 1 Connecting Bridge</item>
+        <item>Entry 3 Connecting bridge</item>
+        <item>Entry Gates</item>
+        <item>Escalator</item>
+        <item>Escalators</item>
+        <item>Escalators entry gate 1   and  3</item>
+        <item>Female frisking booth</item>
+        <item>FIDS   and  Pillar</item>
+        <item>FIDS  and  Pillar</item>
+        <item>Food street pathway  and  Staircase</item>
+        <item>Frisking ledges</item>
+        <item>Hand Rails</item>
+        <item>Immigration Counters</item>
+        <item>Immigration Offices</item>
+        <item>Inclinators</item>
+        <item>Information  Desk</item>
+        <item>Information Desk</item>
+        <item>Isolation room</item>
+        <item>Level 4 Office</item>
+        <item>Logistics, Level B drive way</item>
+        <item>MHB Counter</item>
+        <item>Monitors</item>
+        <item>Normal waste</item>
+        <item>Normal wsate</item>
+        <item>OOG Elevators</item>
+        <item>Out feed tray points</item>
+        <item>P-20  elevator from Level D -E</item>
+        <item>Passenger  seating</item>
+        <item>Passenger seating</item>
+        <item>PESC staff</item>
+        <item>Prayer room</item>
+        <item>Printers</item>
+        <item>PRM Lounge</item>
+        <item>Public area</item>
+        <item>Q Top Signage  boards</item>
+        <item>Q Top Signage boards</item>
+        <item>Q-Managers</item>
+        <item>Railing</item>
+        <item>Ramp wash room</item>
+        <item>Remote arrival washroom</item>
+        <item>Remote Bus Gates connecting Elevator  and  Escalators (F to E)</item>
+        <item>Reserved  Lounge</item>
+        <item>Reserved lounge</item>
+        <item>S1 and S4 corridor</item>
+        <item>S10 service corridor</item>
+        <item>S9 service corridor</item>
+        <item>SBD</item>
+        <item>Shopping Trolleys</item>
+        <item>Soil barrier mats at entry 1, 2and3</item>
+        <item>Staff Lockers</item>
+        <item>Staff Washroom</item>
+        <item>Staircase 1-2</item>
+        <item>Staircase 3-4</item>
+        <item>State police counter</item>
+        <item>Ticketing counters glass</item>
+        <item>Transfer  area including XBIS machines</item>
+        <item>Transfer area including XBIS</item>
+        <item>Transfer Desk counters</item>
+        <item>Trays cleaning</item>
+        <item>Triage room</item>
+        <item>Unpacking and Repacking tables</item>
+        <item>Visitors Gallery</item>
+        <item>Wash room</item>
+        <item>Soil barrier mats at entry 1, 2 and 3</item>
+
+    </string-array>
+</resources>

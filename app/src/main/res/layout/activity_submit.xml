@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_x="120dp"
+    android:layout_y="270dp"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".Submit">
+
+
+    <TextView
+        android:id="@+id/Area"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textshape"
+        android:text="Area"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008" />
+    <TextView
+        android:id="@+id/TouchPoint"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textshape"
+        android:text="Touch Point"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008" />
+    <TextView
+        android:id="@+id/ContactArea"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textshape"
+        android:text="Contact Area"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008" />
+
+    <TableLayout
+        android:id="@+id/tab_ly"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:shrinkColumns="*"
+            android:stretchColumns="*">
+
+            <TextView
+                android:id="@+id/cp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight=".25"
+                android:background="@drawable/cell_shape"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
+                android:text="Cleaning Procedures"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <TextView
+                android:id="@+id/cptv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight=".25"
+                android:background="@drawable/tableborder"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#033165"
+                android:textSize="16sp"></TextView>
+
+
+        </TableRow>
+
+
+
+        <TableRow
+            android:shrinkColumns="*"
+            android:stretchColumns="*">
+
+
+            <TextView
+                android:id="@+id/insp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight=".25"
+                android:background="@drawable/cell_shape"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
+                android:text="Inspected By:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <Spinner
+                android:id="@+id/inspectedBySpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight=".25"
+
+                android:background="@drawable/tableborder"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
+                android:textSize="30sp" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:shrinkColumns="*"
+            android:stretchColumns="*">
+
+            <TextView
+                android:id="@+id/name_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight=".25"
+                android:background="@drawable/cell_shape"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
+                android:text="Shift Timings"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="italic"></TextView>
+
+            <Spinner
+                android:id="@+id/fc_shift_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight=".25"
+
+                android:background="@drawable/tableborder"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="10dp"
+                android:textSize="30sp" />
+        </TableRow>
+
+
+
+    </TableLayout>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="163dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="20dp">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="YES" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="NO" />
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/remarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+        android:ems="10"
+
+        android:hint="Remarks"
+        android:inputType="textMultiLine"
+        android:maxLength="4000"
+        android:maxLines="5"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="right"
+        android:text="0/4000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remarks"
+        app:layout_constraintVertical_bias="0.0" />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Submit"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.688" />
+
+</LinearLayout>
