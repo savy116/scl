@@ -9,9 +9,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class TouchPoint extends AppCompatActivity  implements View.OnClickListener{
-    int len = 0;
+    int len = 0,area_id = 0;
     Button button,button2,button3,button4,button5,button6,button7;
+    String report;
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -21,12 +32,13 @@ public class TouchPoint extends AppCompatActivity  implements View.OnClickListen
         SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref",0);
         SharedPreferences.Editor editor=pref.edit();
 
-
+        area_id = getIntent().getIntExtra("Areaid",0);
+        Log.d("MyArea",""+area_id);
         editor.putString("Area",tp);
         editor.putInt("AreaId",getIntent().getIntExtra("Areaid",0));
         editor.commit();
         String[] touchPoints;
-
+//        postRequest();
 
 
         button = findViewById(R.id.button);
@@ -92,6 +104,53 @@ public class TouchPoint extends AppCompatActivity  implements View.OnClickListen
 
 
         }
+
+    private void postRequest() {
+        Log.d("responseFr","button clicked");
+        RequestQueue requestQueue = Volley.newRequestQueue(TouchPoint.this);
+        //String URL = "http://192.168.0.11:8080/login";
+//        String URL = "http://192.168.0.7:8080/getreport";
+        String URL = "http://192.168.43.120:8080/getreport";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                report = response;
+                SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref",0);
+                SharedPreferences.Editor editor=pref.edit();
+
+                editor.putString("report",response);
+                Log.d("responsea",report);
+                editor.commit();
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("errorVoll",""+error);
+                //Toast.makeText(Submit.this,"Cannot Access Web Service",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("areaId",""+area_id);
+
+
+                return params;
+            }
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String,String> params= new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 
 
 
@@ -165,42 +224,43 @@ public void showButton(String[] touchPoints){
                     Intent intent = new Intent(TouchPoint.this,Monitor.class);
                     String touchpoint = button.getText().toString();
                     intent.putExtra("touchpoint",touchpoint);
+                    intent.putExtra("Areaid",area_id);
                     startActivity(intent);
                     break;
                 case R.id.button2:
                     Intent intent2 = new Intent(TouchPoint.this,Monitor.class);
                      touchpoint = button2.getText().toString();
-                    intent2.putExtra("touchpoint",touchpoint);
+                    intent2.putExtra("touchpoint",touchpoint);intent2.putExtra("Areaid",area_id);
                     startActivity(intent2);
                     break;
                 case R.id.button3:
                     Intent intent3 = new Intent(TouchPoint.this,Monitor.class);
                      touchpoint = button3.getText().toString();
-                    intent3.putExtra("touchpoint",touchpoint);
+                    intent3.putExtra("touchpoint",touchpoint);intent3.putExtra("Areaid",area_id);
                     startActivity(intent3);
                     break;
                 case R.id.button4:
                     Intent intent4 = new Intent(TouchPoint.this,Monitor.class);
                      touchpoint = button4.getText().toString();
-                    intent4.putExtra("touchpoint",touchpoint);
+                    intent4.putExtra("touchpoint",touchpoint);intent4.putExtra("Areaid",area_id);
                     startActivity(intent4);
                     break;
                 case R.id.button5:
                     Intent intent5 = new Intent(TouchPoint.this,Monitor.class);
                      touchpoint = button5.getText().toString();
-                    intent5.putExtra("touchpoint",touchpoint);
+                    intent5.putExtra("touchpoint",touchpoint);intent5.putExtra("Areaid",area_id);
                     startActivity(intent5);
                     break;
                 case R.id.button6:
                     Intent intent6 = new Intent(TouchPoint.this,Monitor.class);
                      touchpoint = button6.getText().toString();
-                    intent6.putExtra("touchpoint",touchpoint);
+                    intent6.putExtra("touchpoint",touchpoint);intent6.putExtra("Areaid",area_id);
                     startActivity(intent6);
                     break;
                 case R.id.button7:
                     Intent intent7 = new Intent(TouchPoint.this,Monitor.class);
                      touchpoint = button7.getText().toString();
-                    intent7.putExtra("touchpoint",touchpoint);
+                    intent7.putExtra("touchpoint",touchpoint);intent7.putExtra("Areaid",area_id);
                     startActivity(intent7);
                     break;
 
@@ -211,7 +271,7 @@ public void showButton(String[] touchPoints){
             case R.id.button:
                 String touchpoint = button.getText().toString();
                 Intent intent =new Intent(TouchPoint.this,ContactArea.class);
-                intent.putExtra("touchpoint",touchpoint);
+                intent.putExtra("touchpoint",touchpoint);intent.putExtra("Areaid",area_id);
                 startActivity(intent);
                 break;
 
@@ -219,42 +279,42 @@ public void showButton(String[] touchPoints){
             case R.id.button2:
                  touchpoint = button2.getText().toString();
                 Intent intent2 =new Intent(TouchPoint.this,ContactArea.class);
-                intent2.putExtra("touchpoint",touchpoint);
+                intent2.putExtra("touchpoint",touchpoint);intent2.putExtra("Areaid",area_id);
                 startActivity(intent2);
                 break;
 
             case R.id.button3:
                  touchpoint = button3.getText().toString();
                 Intent intent3 =new Intent(TouchPoint.this,ContactArea.class);
-                intent3.putExtra("touchpoint",touchpoint);
+                intent3.putExtra("touchpoint",touchpoint);intent3.putExtra("Areaid",area_id);
                 startActivity(intent3);
                 break;
 
             case R.id.button4:
                  touchpoint = button4.getText().toString();
                 Intent intent4 =new Intent(TouchPoint.this,ContactArea.class);
-                intent4.putExtra("touchpoint",touchpoint);
+                intent4.putExtra("touchpoint",touchpoint);intent4.putExtra("Areaid",area_id);
                 startActivity(intent4);
                 break;
 
             case R.id.button5:
                  touchpoint = button5.getText().toString();
                 Intent intent5 =new Intent(TouchPoint.this,ContactArea.class);
-                intent5.putExtra("touchpoint",touchpoint);
+                intent5.putExtra("touchpoint",touchpoint);intent5.putExtra("Areaid",area_id);
                 startActivity(intent5);
                 break;
 
             case R.id.button6:
                  touchpoint = button6.getText().toString();
                 Intent intent6 =new Intent(TouchPoint.this,ContactArea.class);
-                intent6.putExtra("touchpoint",touchpoint);
+                intent6.putExtra("touchpoint",touchpoint);intent6.putExtra("Areaid",area_id);
                 startActivity(intent6);
                 break;
 
             case R.id.button7:
                  touchpoint = button7.getText().toString();
                 Intent intent7 =new Intent(TouchPoint.this,ContactArea.class);
-                intent7.putExtra("touchpoint",touchpoint);
+                intent7.putExtra("touchpoint",touchpoint);intent7.putExtra("Areaid",area_id);
                 startActivity(intent7);
                 break;
 

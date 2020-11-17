@@ -50,10 +50,11 @@ public class SuperviseArea extends AppCompatActivity implements View.OnClickList
 
     private void postRequest() {
         Log.d("responseFr","button clicked");
+
         RequestQueue requestQueue = Volley.newRequestQueue(SuperviseArea.this);
         //String URL = "http://192.168.0.11:8080/login";
 //        String URL = "http://192.168.0.7:8080/getreport";
-        String URL = "http://192.168.43.120:8080/getreport";
+        String URL = (new Parameters().returnParameter())+"getreport";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -10,6 +10,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static android.graphics.Color.RED;
 
 public class ContactArea extends AppCompatActivity implements View.OnClickListener {
@@ -24,9 +38,13 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
     String[] buttonEnablerContactArea = new String[100];
     String[] buttonEnableRed = new String[100];
     String[] buttonText = new String[100];
-
+    String[] contactArea = new String[100];
+    String report;
     DataBaseHelper myDb;
-
+    JSONObject jo = null;
+    JSONArray arr = null;
+    int length = 0;
+    int area_id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +53,42 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
         myDb = new DataBaseHelper(this);
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", 0);
         Area = preferences.getString("Area", null);
+
+        SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref",0);
+
+        area_id = getIntent().getIntExtra("Areaid",0);
+        Log.d("MyArea",""+area_id);
+       // postRequest();
+        report = pref.getString("report","Power Login");
+//        TouchPoint tpres = new TouchPoint();
+//        tpres.postRequest();
+
+        try {
+            jo = new JSONObject(report);
+            arr = jo.getJSONArray("Report");
+
+//             Log.d("Areaa",""+arr);
+String touchpoint = getIntent().getStringExtra("touchpoint");
+            for (int i = 0; i < arr.length(); i++)
+            {
+                String sample = arr.getJSONObject(i).getString("Area");
+
+
+                Log.d("Areaa",""+sample+" "+touchpoint+i);
+                Log.d("responsea",touchpoint+" "+arr.getJSONObject(i).optString("tp"));
+                if(touchpoint.equalsIgnoreCase(arr.getJSONObject(i).optString("tp"))){
+                    String score;
+                    try{score = arr.getJSONObject(i).getString("score");}catch (JSONException | NullPointerException e){e.printStackTrace();Log.d("Areaa","score"+e);score = "NOT UPDATED";}
+                    Log.d("contact",touchpoint+" "+arr.getJSONObject(i).optString("ca"));
+                    if(score.equalsIgnoreCase("NOT UPDATED"))
+                    try{contactArea[length] = arr.getJSONObject(i).getString("ca");}catch (JSONException | NullPointerException e){e.printStackTrace();Log.d("Areaa","contactArea"+e);contactArea[i] = "";}
+
+                    length++; }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
@@ -250,9 +304,10 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
 
 
         }
+//        rollOverButton();
 
 //actual red code
-        updateButtonIndicator(Area, touchPoint, "ca0");
+//        updateButtonIndicator(Area, touchPoint, "ca0");
     }
 
     @Override
@@ -260,8 +315,62 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
         super.onResume();
         Log.d("lifecycle", "onResume invoked");
         myDb = new DataBaseHelper(this);
-        updateButtonIndicator(Area, touchPoint, "ca0");
+//        updateButtonIndicator(Area, touchPoint, "ca0");
+//////////        SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", 0);
+////////        area_id = getIntent().getIntExtra("Areaid",0);
+////////        postRequest();
+       // postRequest();
     }
+
+    private void postRequest() {
+        Log.d("responseFr","button clicked");
+        Log.d("MyArea",""+area_id+" in post");
+        RequestQueue requestQueue = Volley.newRequestQueue(ContactArea.this);
+        //String URL = "http://192.168.0.11:8080/login";
+//        String URL = "http://192.168.0.7:8080/getreport";
+        String URL = "http://192.168.43.120:8080/getreport";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                report = response;
+                SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref",0);
+                SharedPreferences.Editor editor=pref.edit();
+
+                editor.putString("report",response);
+                Log.d("responses",""+response);
+                Log.d("responsea",report);
+                editor.commit();
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("errorVoll",""+error);
+                //Toast.makeText(Submit.this,"Cannot Access Web Service",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("areaId",""+area_id);
+
+
+                return params;
+            }
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String,String> params= new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
 
 
     private void printallids() {
@@ -1956,8 +2065,6 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
                 intent35.putExtra("touchPoint", touchPoint);
                 startActivity(intent35);
                 break;
-
-
         }
     }
 
@@ -1967,31 +2074,31 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    public void updateButtonIndicator(String Area, String tp, String ca) {
-        Cursor cursor = myDb.getData2(Area, tp);
-        if (cursor.getCount() == 0)
-            Log.d("Database ", "No Data");
-        StringBuffer buffer = new StringBuffer();
-        int j = 0;
-        while (cursor.moveToNext()) {
-            buttonEnablerContactArea[j] = cursor.getString(2);
-            buttonEnableRed[j] = cursor.getString(3);
-            buffer.append("Area:" + cursor.getString(0) + "\n");
-            buffer.append("tp:" + cursor.getString(1) + "\n");
-            buffer.append("ca:" + cursor.getString(2) + "\n");
-            buffer.append("touch:" + cursor.getString(3) + "\n");
-            try{buffer.append("date:"+cursor.getString(4)+"\n");}catch (Exception e){
-                e.printStackTrace();
-            }
-            j++;
-        }
-        for (int i = 0; i < j; i++) {
-            Log.d("DatabaseData2", "" + buttonEnableRed[i] + "  " + buttonEnablerContactArea[i]);
-
-        }
-        rollOverButton();
-        Log.d("DatabaseData", buffer.toString());
-    }
+//    public void updateButtonIndicator(String Area, String tp, String ca) {
+//        Cursor cursor = myDb.getData2(Area, tp);
+//        myDb.getData();
+//        if (cursor.getCount() == 0)
+//            Log.d("Database ", "No Data");
+//        StringBuffer buffer = new StringBuffer();
+//        int j = 0;
+//        while (cursor.moveToNext()) {
+//            buttonEnablerContactArea[j] = cursor.getString(2);
+//            buttonEnableRed[j] = cursor.getString(3);
+//            buffer.append("Area:" + cursor.getString(0) + "\n");
+//            buffer.append("tp:" + cursor.getString(1) + "\n");
+//            buffer.append("ca:" + cursor.getString(2) + "\n");
+//            buffer.append("touch:" + cursor.getString(3) + "\n");
+//            try{buffer.append("date:"+cursor.getString(4)+"\n");}catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            j++;
+//        }
+//        for (int i = 0; i < j; i++) {
+//            Log.d("DatabaseData2", "" + buttonEnableRed[i] + "  " + buttonEnablerContactArea[i]);
+//        }
+//        rollOverButton();
+//        Log.d("DatabaseData", buffer.toString());
+//    }
     public void rollOverButton(){
         String  buttonText2 = null;
         for(int i=0;i<37;i++)
@@ -1999,185 +2106,403 @@ public class ContactArea extends AppCompatActivity implements View.OnClickListen
 
             case 1:
                 buttonText2 = (String)button0.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    Log.d("DatabaseData",""+buttonText2+"  "+buttonEnablerContactArea[j]+"  inside");
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button0.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                    if(buttonText2.equalsIgnoreCase(temp1)){
+                        button0.setBackgroundColor(RED);
+                    break;}}catch (Exception e){
+                    }
+                }break;
             case 2:
                 buttonText2 = (String)button1.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button1.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button1.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 3:
                 buttonText2 = (String)button2.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button2.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        temp1 = contactArea[j].replaceAll("&","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll("&","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button2.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 4:
                 buttonText2 = (String)button3.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button3.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button3.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 5:
                 buttonText2 = (String)button4.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button4.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button4.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 6:
                 buttonText2 = (String)button5.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button5.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button5.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 7:
                 buttonText2 = (String)button6.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button6.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button6.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 8:
                 buttonText2 = (String)button7.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button7.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button7.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 9:
                 buttonText2 = (String)button8.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button8.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button8.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 10:
                 buttonText2 = (String)button9.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button9.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button9.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 11:
                 buttonText2 = (String)button10.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button10.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button10.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 12:
                 buttonText2 = (String)button11.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button11.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button11.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 13:
                 buttonText2 = (String)button12.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button12.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button12.setBackgroundColor(RED);break;}}catch (Exception e){
+                    }
+                }break;
             case 14:
                 buttonText2 = (String)button13.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button13.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button13.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 15:
                 buttonText2 = (String)button14.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button14.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button14.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 16:
                 buttonText2 = (String)button15.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button15.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button15.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 17:
                 buttonText2 = (String)button16.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button16.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button16.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 18:
                 buttonText2 = (String)button17.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button17.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button17.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 19:
                 buttonText2 = (String)button18.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button18.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button18.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 20:
                 buttonText2 = (String)button19.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button19.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button19.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 21:
                 buttonText2 = (String)button20.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button20.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button20.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 22:
                 buttonText2 = (String)button21.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button21.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button21.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 23:
                 buttonText2 = (String)button22.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button22.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button22.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 24:
                 buttonText2 = (String)button23.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button23.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button23.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 25:
                 buttonText2 = (String)button24.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button24.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button24.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 26:
                 buttonText2 = (String)button25.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button25.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button25.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 27:
                 buttonText2 = (String)button26.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button26.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button26.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 28:
                 buttonText2 = (String)button27.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button27.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button27.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 29:
                 buttonText2 = (String)button28.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button28.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button28.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 30:
                 buttonText2 = (String)button29.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button29.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button29.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 31:
                 buttonText2 = (String)button30.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button30.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button30.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 32:
                 buttonText2 = (String)button31.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button31.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button31.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 33:
                 buttonText2 = (String)button32.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button32.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button32.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 34:
                 buttonText2 = (String)button33.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button33.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button33.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 35:
                 buttonText2 = (String)button34.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button34.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button34.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
             case 36:
                 buttonText2 = (String)button35.getText();
-                for(int j = 0;j<buttonEnablerContactArea.length;j++){
-                    if(buttonText2.equalsIgnoreCase(buttonEnablerContactArea[j])){
-                        button35.setBackgroundColor(RED);}}break;
+                for(int j = 0;j<=length;j++){
+
+                    try{String temp1 = contactArea[j].replaceAll(" ","");
+                        buttonText2=buttonText2.replaceAll(" ","");
+                        Log.d("DatabaseData222",""+buttonText2+"  "+temp1+"  inside");
+                        if(buttonText2.equalsIgnoreCase(temp1)){
+                            button35.setBackgroundColor(RED);}}catch (Exception e){
+                    }
+                }break;
 
         }
     }

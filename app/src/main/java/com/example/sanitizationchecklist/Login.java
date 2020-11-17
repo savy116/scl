@@ -61,10 +61,14 @@ public class Login extends AppCompatActivity {
 
     private void postRequest() {
         Log.d("responseFr","button clicked");
+        Parameters parameters = new Parameters();
+
         RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
         //String URL = "http://192.168.0.11:8080/login";
         //String URL = "http://192.168.0.7:8080/login";
-        String URL = "http://192.168.43.120:8080/login";
+//        String URL = "http://192.168.43.120:8080/login";
+        String URL = parameters.returnParameter()+"login";
+        Log.d("response",""+URL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -76,11 +80,11 @@ public class Login extends AppCompatActivity {
                     Log.d("response",""+ldapVerify);
                     Log.d("responseFr",ldapVerify+"  "+desg);
 
-                    if(true){
+                    if("true".equalsIgnoreCase(ldapVerify)){
                         Log.d("responseFr",userid+" "+desg);
                         SharedPreferences pref=getApplicationContext().getSharedPreferences("MyPref",0);
                         SharedPreferences.Editor editor=pref.edit();
-
+                        Toast.makeText(Login.this,"Login Successful",Toast.LENGTH_SHORT).show();
                         editor.putString("userDesg",desg);
                         //editor.putString("powerlogin","YES");
                         editor.commit();
@@ -93,6 +97,8 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(Login.this,Areas.class);
                             startActivity(intent);
                         }
+                    }else{
+                        Toast.makeText(Login.this,"Invalid Credentials",Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -107,7 +113,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("errorVoll",""+error);
-                //Toast.makeText(Submit.this,"Cannot Access Web Service",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this,"Cannot Access Web Service",Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

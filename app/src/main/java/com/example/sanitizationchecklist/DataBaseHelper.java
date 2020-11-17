@@ -63,6 +63,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+        StringBuffer buffer = new StringBuffer();
+        int j = 0;
+        while (cursor.moveToNext()) {
+//            buttonEnablerContactArea[j] = cursor.getString(2);
+//            buttonEnableRed[j] = cursor.getString(3);
+            buffer.append("Area:" + cursor.getString(0) + "\n");
+            buffer.append("tp:" + cursor.getString(1) + "\n");
+            buffer.append("ca:" + cursor.getString(2) + "\n");
+            buffer.append("touch:" + cursor.getString(3) + "\n");
+            try{buffer.append("date:"+cursor.getString(4)+"\n");}catch (Exception e){
+                e.printStackTrace();
+            }
+            j++;
+            Log.d("DatabaseFata22",buffer.toString());
+        }
         return res;
     }
     public Cursor getData2(String area,String tp){

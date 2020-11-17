@@ -452,7 +452,7 @@ int touchpointId = 0,contactAreaId = 0,areaId = 0;
     private void postRequest() {
 
         RequestQueue requestQueue = Volley.newRequestQueue(Submit.this);
-        String URL = "http://192.168.43.120:8080/InsertCheckList";
+        String URL = (new Parameters().returnParameter())+"InsertCheckList";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -485,7 +485,7 @@ int touchpointId = 0,contactAreaId = 0,areaId = 0;
                 params.put("caid",""+contactAreaId);
                 params.put("remarks",""+remarks);
                 params.put("entryBy","ADMIN FROM APP");
-                params.put("score","YES");
+                params.put("score",checkbutton);
                 params.put("entryByDesg","ADMIN");
                 params.put("Latitude",""+lat);
                 params.put("Longitude",""+longi);
